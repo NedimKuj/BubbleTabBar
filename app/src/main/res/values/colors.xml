@@ -6,4 +6,9 @@
     <color name="background">#ffffff</color>
     <color name="light_background">#f4f4f4</color>
     <color name="invert">#202020</color>
+
+    <color name="home">@color/colorPrimary</color>
+    <color name="logger">@color/colorPrimary</color>
+    <color name="documents">@color/colorPrimary</color>
+    <color name="settings">@color/colorPrimary</color>
 </resources>
