@@ -15,11 +15,11 @@ buildscript {
 }
 
 allprojects {
-    plugins.withId("com.vanniktech.maven.publish") {
-        mavenPublish {
-            sonatypeHost = "S01"
-        }
-    }
+//    plugins.withId("com.vanniktech.maven.publish") {
+//        mavenPublish {
+//            sonatypeHost = "S01"
+//        }
+//    }
     repositories {
         google()
         mavenCentral()
