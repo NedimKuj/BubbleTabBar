@@ -83,4 +83,12 @@
             android:text="Deselect Item"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
+    <Button
+            android:id="@+id/reselectBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Reselect last Item"
+            app:layout_constraintTop_toBottomOf="@id/deselectBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

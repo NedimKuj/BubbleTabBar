@@ -56,21 +56,24 @@ class BubbleTabBar : LinearLayout {
 
         if (bubbleToSelect == null) {
             oldBubble?.isSelected = false
-            oldBubble = null
             return
         }
 
-        if (oldBubble != null && oldBubble!!.id != bubbleToSelect.id) {
+        if (oldBubble != null && (oldBubble!!.isSelected && oldBubble!!.id != bubbleToSelect.id)) {
             bubbleToSelect.isSelected = !bubbleToSelect.isSelected
             oldBubble!!.isSelected = false
-        } else if (oldBubble == null) {
-            bubbleToSelect.isSelected = true
+            oldBubble = bubbleToSelect
+        } else if (oldBubble!= null && oldBubble?.isSelected == false) {
+            oldBubble!!.isSelected = true
         }
 
-        oldBubble = bubbleToSelect
         if (onBubbleClickListener != null && callListener) {
             onBubbleClickListener!!.onBubbleClick(bubbleToSelect.id)
         }
+    }
+
+    fun reselectLastItem() {
+        oldBubble?.isSelected = true
     }
 
     fun setSelectedWithId(@IdRes id: Int, callListener: Boolean = true) {
@@ -172,8 +175,9 @@ class BubbleTabBar : LinearLayout {
                     if (oldBubble != null && oldBubble!!.id != b) {
                         (it as Bubble).isSelected = !it.isSelected
                         oldBubble!!.isSelected = false
-                    } else if (oldBubble == null) {
+                    } else if (oldBubble != null && oldBubble!!.id == b && !oldBubble!!.isSelected) {
                         (it as Bubble).isSelected = true
+                        oldBubble!!.isSelected = true
                     }
                     oldBubble = it as Bubble
                     if (onBubbleClickListener != null) {

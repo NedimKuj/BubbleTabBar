@@ -46,6 +46,10 @@ class ViewPager2Fragment : Fragment() {
         binding.deselectBtn.setOnClickListener {
             binding.bubbleTabBar.setSelected(null, false)
         }
+
+        binding.reselectBtn.setOnClickListener {
+            binding.bubbleTabBar.reselectLastItem()
+        }
     }
 
     override fun onDestroyView() {
