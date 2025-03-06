@@ -51,17 +51,25 @@ class BubbleTabBar : LinearLayout {
         this.onBubbleClickListener = onBubbleClickListener
     }
 
-    fun setSelected(position: Int, callListener: Boolean = true) {
-        val it = (this@BubbleTabBar.getChildAt(position) as Bubble)
+    fun setSelected(position: Int?, callListener: Boolean = true) {
+        val bubbleToSelect = (this@BubbleTabBar.getChildAt(position ?: -1) as? Bubble)
 
-        val b = it.id
-        if (oldBubble != null && oldBubble!!.id != b) {
-            it.isSelected = !it.isSelected
-            oldBubble!!.isSelected = false
+        if (bubbleToSelect == null) {
+            oldBubble?.isSelected = false
+            oldBubble = null
+            return
         }
-        oldBubble = it
+
+        if (oldBubble != null && oldBubble!!.id != bubbleToSelect.id) {
+            bubbleToSelect.isSelected = !bubbleToSelect.isSelected
+            oldBubble!!.isSelected = false
+        } else if (oldBubble == null) {
+            bubbleToSelect.isSelected = true
+        }
+
+        oldBubble = bubbleToSelect
         if (onBubbleClickListener != null && callListener) {
-            onBubbleClickListener!!.onBubbleClick(it.id)
+            onBubbleClickListener!!.onBubbleClick(bubbleToSelect.id)
         }
     }
 
@@ -164,6 +172,8 @@ class BubbleTabBar : LinearLayout {
                     if (oldBubble != null && oldBubble!!.id != b) {
                         (it as Bubble).isSelected = !it.isSelected
                         oldBubble!!.isSelected = false
+                    } else if (oldBubble == null) {
+                        (it as Bubble).isSelected = true
                     }
                     oldBubble = it as Bubble
                     if (onBubbleClickListener != null) {

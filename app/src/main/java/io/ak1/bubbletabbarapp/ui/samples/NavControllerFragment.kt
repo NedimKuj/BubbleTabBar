@@ -33,6 +33,9 @@ class NavControllerFragment : Fragment() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.bubbleTabBar.setSelectedWithId(destination.id, false)
         }
+        binding.deselectBtn.setOnClickListener {
+            binding.bubbleTabBar.setSelected(null, false)
+        }
     }
 
     override fun onDestroyView() {
